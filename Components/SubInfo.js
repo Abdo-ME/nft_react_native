@@ -2,18 +2,34 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { assets, COLORS, SIZES, SHADOWS, FONTS } from '../constants'
 
-export const NFTTitle = () => {
+export const NFTTitle = ({ title, subTitle, titleSize, subTitleSize }) => {
     return (
-        <View>
-            <Text>SubInfo</Text>
+        <View >
+            <Text style={{ fontFamily: FONTS.semiBold, fontSize: titleSize }}> {title} </Text>
+            <Text style={{ fontFamily: FONTS.regular, fontSize: subTitleSize }}> {subTitle} </Text>
         </View>
     )
 }
 
-export const EthPrice = () => {
+export const EthPrice = ({ price }) => {
     return (
-        <View>
-            <Text>EthPrice</Text>
+        <View style={{
+            flexDirection: 'row',
+            alignItems: 'center'
+        }}>
+            <Image
+                source={assets.eth}
+                resizeMode='contain'
+                style={{
+                    width: 20,
+                    height: 20,
+                    marginRight: 2
+                }} />
+            <Text style={{
+                fontFamily: FONTS.medium,
+                fontSize: SIZES.font,
+                color: COLORS.primary
+            }} >{price}</Text>
         </View>
     )
 }
