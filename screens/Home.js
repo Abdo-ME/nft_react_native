@@ -40,6 +40,7 @@ const Home = () => {
 
 
             </View>
+
         </SafeAreaView>
     )
 }
