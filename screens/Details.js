@@ -1,7 +1,8 @@
-import { View, Text, Image, SafeAreaView, FlatList } from 'react-native'
+import { View, Text, Image, SafeAreaView, FlatList, StatusBar } from 'react-native'
 import { assets, COLORS, SIZES, SHADOWS, FONTS } from '../constants'
 import { CircleButton, RectButton } from '../Components/Button'
-import { DetailsBid, FocusedStatusBar } from '../Components'
+import { DetailsBid, DetailsDesc, FocusedStatusBar } from '../Components'
+import { SubInfo } from '../Components/SubInfo'
 
 const DetailsHeader = ({ data, navigation }) => {
     return (
@@ -10,6 +11,17 @@ const DetailsHeader = ({ data, navigation }) => {
                 source={data.image}
                 resizeMode='cover'
                 style={{ width: '100%', height: '100%' }}
+            />
+            <CircleButton
+                imgUrl={assets.left}
+                handlePress={() => navigation.goBack()}
+                left={15}
+                top={StatusBar.currentHeight + 10}
+            />
+            <CircleButton
+                imgUrl={assets.heart}
+                right={15}
+                top={StatusBar.currentHeight + 10}
             />
         </View>
     )
@@ -32,7 +44,7 @@ const Details = ({ route, navigation }) => {
                     paddingVertical: SIZES.font,
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: "rgba(255,255,255,0.5)",
+                    backgroundColor: "rgba(255,255,255,0.4)",
                     zIndex: 1,
                 }}
             >
@@ -47,6 +59,20 @@ const Details = ({ route, navigation }) => {
                 ListHeaderComponent={() => (
                     <>
                         <DetailsHeader data={data} navigation={navigation} />
+                        <SubInfo />
+                        <View style={{ padding: SIZES.font }}>
+                            <DetailsDesc data={data} />
+                            {data.bids.length > 0 && (
+                                <Text
+                                    style={{
+                                        fontSize: SIZES.font,
+                                        fontFamily: FONTS.semiBold,
+                                        color: COLORS.primary
+                                    }}>
+                                    Cuurent Bid
+                                </Text>
+                            )}
+                        </View>
                     </>
                 )}
             />
